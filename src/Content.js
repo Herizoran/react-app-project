@@ -1,33 +1,49 @@
 import React, {Component} from 'react';
+import {useState} from 'react';
 
 class MainContent extends Component{
   render() {
     return(
-      <div class="container-fluid px-4">
-          <h1 class="mt-4">Tables</h1>
-          <ol class="breadcrumb mb-4">
-              <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-              <li class="breadcrumb-item active">Tables</li>
+      <div className="container-fluid px-4">
+          <h1 className="mt-4">Tables</h1>
+          <ol className="breadcrumb mb-4">
+              <li className="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+              <li className="breadcrumb-item active">Tables</li>
           </ol>
-          <div class="card mb-4">
-              <div class="card-body">
+          <div className="card mb-4">
+              <div className="card-body">
                   DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the
                   <a target="_blank" href="https://datatables.net/">official DataTables documentation</a> .
               </div>
           </div>
-          <div class="card mb-4">
-              <div class="card-header">
-                  <i class="fas fa-table me-1"></i>
+          <div className="card mb-4">
+              <div className="card-header">
+                  <i className="fas fa-table me-1"></i>
                   DataTable Example
               </div>
-              <div class="card-body">
-                  <this.tableContent/>
+              <div className="card-body">
+                <this.filterTable/>
+                <this.tableContent/>
+                <this.pagination/>
               </div>
           </div>
       </div>
     );
   }
 
+  filterTable(){
+    return(
+      <div className="dataTable-top">
+          <div className="dataTable-dropdown">
+              <label><select className="dataTable-selector"><option value="5">5</option><option value="10" selected="">10</option><option value="15">15</option><option value="20">20</option><option value="25">25</option></select> entries per page</label>
+          </div>
+          <div className="dataTable-search">
+            <input className="dataTable-input" placeholder="Search..." type="text">
+            </input>
+          </div>
+      </div>
+      );
+  }
   tableContent(){
     let employeeList = [['Tiger Nixon', 'System Architect', 'Edinburgh', '61', '2011/04/25', '$320,800'], ['Garrett Winters', 'Accountant', 'Tokyo', '63', '2011/07/25', '$170,750'], ['Ashton Cox', 'Junior Technical Author', 'San Francisco', '66', 
     '2009/01/12', '$86,000'], ['Cedric Kelly', 'Senior Javascript Developer', 'Edinburgh', '22', '2012/03/29', '$433,060'], ['Airi Satou', 'Accountant', 'Tokyo', '33', '2008/11/28', '$162,700'], ['Brielle Williamson', 'Integration Specialist', 'New York', '61', '2012/12/02', '$372,000'], ['Herrod Chandler', 'Sales Assistant', 'San Francisco', '59', '2012/08/06', '$137,500'], ['Rhona Davidson', 'Integration Specialist', 'Tokyo', '55', '2010/10/14', 
@@ -49,25 +65,39 @@ class MainContent extends Component{
       });
     let headerColumn = ['Name','Position','Office','Age','Start','Salary']
     let headerColumnReturn = headerColumn.map(head =>{
-        return <th>{head}</th>
+        return <th data-sortable=""><a href="#" className="dataTable-sorter">{head}</a></th>
+
       });
     return(
-      <table id="datatablesSimple">
+      <table id="datatablesSimple" className="dataTable-table">
           <thead>
               <tr>
                 {headerColumnReturn}
               </tr>
           </thead>
-          <tfoot>
-              <tr>
-                {headerColumnReturn}
-              </tr>
-          </tfoot>
           <tbody>
             {employeeListReturn}
           </tbody>
       </table>
+      );
+  }
 
+  pagination(){
+    return(
+      <div className="dataTable-bottom">
+          <div className="dataTable-info">Showing 1 to 10 of 57 entries</div>
+          <nav className="dataTable-pagination">
+              <ul className="dataTable-pagination-list">
+                  <li className="active"><a href="#" data-page="1">1</a></li>
+                  <li className=""><a href="#" data-page="2">2</a></li>
+                  <li className=""><a href="#" data-page="3">3</a></li>
+                  <li className=""><a href="#" data-page="4">4</a></li>
+                  <li className=""><a href="#" data-page="5">5</a></li>
+                  <li className=""><a href="#" data-page="6">6</a></li>
+                  <li className="pager"><a href="#" data-page="2">›</a></li>
+              </ul>
+          </nav>
+      </div>
       );
   }
 }
