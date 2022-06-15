@@ -35,7 +35,15 @@ class MainContent extends Component{
     return(
       <div className="dataTable-top">
           <div className="dataTable-dropdown">
-              <label><select className="dataTable-selector"><option value="5">5</option><option value="10" selected="">10</option><option value="15">15</option><option value="20">20</option><option value="25">25</option></select> entries per page</label>
+              <label>
+                <select className="dataTable-selector">
+                  <option value="5">5</option>
+                  <option value="10" selected="">10</option>
+                  <option value="15">15</option>
+                  <option value="20">20</option>
+                  <option value="25">25</option>
+                </select> entries per page
+              </label>
           </div>
           <div className="dataTable-search">
             <input className="dataTable-input" placeholder="Search..." type="text">
